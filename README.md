@@ -2,6 +2,46 @@ jarTransformer
 ===========
 Read and Transform the contents of jar file entry in the jar file.
 
+Sample
+------
+```kotlin
+ transformJar(File("input.jar"), File("output.jar")) { inputJarEntry, outputJarEntryInputStream ->
+      when {
+          inputJarEntry.isClassFile() -> {
+              // handle class file
+              val clazz = ClassPool().makeClass(outputJarEntryInputStream)
+              // modify bytecode
+              if (clazz.name == "androidx.activity.R") {
+                  clazz.addField(CtField(CtClass.intType, "generated_int_field", clazz), "100")
+              }
+              clazz.toBytecode()
+          }
+          inputJarEntry.isDirectory -> {
+              outputJarEntryInputStream.readBytes()
+          }
+          else -> {
+              outputJarEntryInputStream.readBytes()
+          }
+      }
+ }
+
+```
+
+Or Use DSL API:
+```kotlin
+ transformJarDsl(File("input.jar"), File("output.jar")) {
+      handleClassEntry { outputJarEntryInputStream ->
+          // handle class file
+          val clazz = ClassPool().makeClass(outputJarEntryInputStream)
+          // modify bytecode
+          if (clazz.name == "androidx.activity.R") {
+              clazz.addField(CtField(CtClass.intType, "generated_int_field", clazz), "100")
+          }
+          clazz.toBytecode()
+      }
+ }
+```
+
 Download
 --------
 
@@ -12,7 +52,7 @@ repositories {
 }
 
 dependencies {
-    implementation("cn.nikeo.jar-transformer:jar-transformer:0.1.0")
+    implementation("cn.nikeo.jar-transformer:jar-transformer:1.0.0")
 }
 ```
 
@@ -21,7 +61,7 @@ dependencies {
 <dependency>
   <groupId>cn.nikeo.jar-transformer</groupId>
   <artifactId>jar-transformer</artifactId>
-  <version>0.1.0</version>
+  <version>1.0.0</version>
   <type>module</type>
 </dependency>
 ```

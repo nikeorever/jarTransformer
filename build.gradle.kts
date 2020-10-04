@@ -15,7 +15,7 @@ allprojects {
 
 subprojects {
     group = "cn.nikeo.jar-transformer"
-    version = "0.1.0-SNAPSHOT"
+    version = "1.0.0"
 
     plugins.withId("org.jetbrains.kotlin.jvm") {
         tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
