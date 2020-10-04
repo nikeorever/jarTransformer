@@ -62,7 +62,6 @@ dependencies {
   <groupId>cn.nikeo.jar-transformer</groupId>
   <artifactId>jar-transformer</artifactId>
   <version>1.0.0</version>
-  <type>module</type>
 </dependency>
 ```
 
