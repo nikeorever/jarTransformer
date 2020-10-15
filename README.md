@@ -1,5 +1,8 @@
 jarTransformer
 ===========
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/cn.nikeo.jar-transformer/jar-transformer/badge.svg)](https://maven-badges.herokuapp.com/maven-central/cn.nikeo.jar-transformer/jar-transformer)
+
 Read and Transform the contents of jar file entry in the jar file.
 
 Sample
